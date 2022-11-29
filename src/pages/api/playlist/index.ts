@@ -23,14 +23,15 @@ export default async function handler(
 async function getPlaylist() {
   const result = await Playlist.find();
   return result.map((doc) => {
+    const playlist = doc.toObject();
     return {
-      id: doc._id,
-      color: doc._color || DEFAULT_CARD_COLOR,
-      name: doc._name,
-      owner: doc._owner,
-      slug: doc._slug,
-      spotifyId: doc._spotifyId,
-      upvote: doc._upvote,
+      id: playlist._id.toString(),
+      color: playlist.color || DEFAULT_CARD_COLOR,
+      name: playlist.name,
+      owner: playlist.owner,
+      slug: playlist.slug,
+      spotifyId: playlist.spotifyId,
+      upvote: playlist.upvote,
     };
   });
 }

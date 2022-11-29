@@ -16,7 +16,7 @@ test("flow", async () => {
 
   let playlistId: string | null = null;
 
- /* await testApiHandler({
+  await testApiHandler({
     handler: createPlaylist,
     test: async ({ fetch }) => {
       const res = await fetch({
@@ -39,7 +39,7 @@ test("flow", async () => {
       // @ts-ignore
       playlistId = body.data!.id;
     },
-  });*/
+  });
 
   await testApiHandler({
     handler: getPlaylists,

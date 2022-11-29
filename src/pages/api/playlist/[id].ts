@@ -25,7 +25,7 @@ async function getPlaylist(id: string) {
   if (!result) return null;
   const playlist = result.toObject();
   return {
-    id: playlist.id.toString(),
+    id: playlist._id.toString(),
     color: playlist.color || DEFAULT_CARD_COLOR,
     name: playlist.name,
     owner: playlist.owner,
