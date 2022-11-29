@@ -11,6 +11,9 @@ export default async function handler(
   if (req.method === "GET") {
     const playlist = await getPlaylist();
     res.status(200).send({ data: playlist });
+  } else if (req.method === "POST") {
+    await createPlaylist(req.body);
+    res.status(201).send({});
   }
 }
 
@@ -19,7 +22,7 @@ async function getPlaylist() {
   return result.map((doc) => {
     return {
       id: doc._id,
-      color: doc._color || undefined,
+      color: doc._color,
       name: doc._name,
       owner: doc._owner,
       slug: doc._slug,
@@ -29,4 +32,6 @@ async function getPlaylist() {
   });
 }
 
-export type Response = any;
+async function createPlaylist(obj: unknown) {
+  await Playlist.create(obj);
+}
