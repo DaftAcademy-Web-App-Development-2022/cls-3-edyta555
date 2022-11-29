@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+import { DEFAULT_CARD_COLOR } from "~/config/common.config";
 
 export interface PlaylistModel {
   color?: string;
@@ -9,8 +10,10 @@ export interface PlaylistModel {
   upvote: number;
 }
 
+//export type PlaylistModelWithId = PlaylistModel & { id: string };
+
 const schema = new Schema<PlaylistModel>({
-  color: { type: String, required: false },
+  color: { type: String, default: DEFAULT_CARD_COLOR },
   name: { type: String, required: true },
   owner: { type: String, required: true },
   slug: { type: String, required: true },

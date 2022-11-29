@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { dbConnect } from "~/libraries/mongoose.library";
 import { Playlist } from "~/models/Playlist.model";
 
+import { DEFAULT_CARD_COLOR } from "~/config/common.config";
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
@@ -13,7 +15,8 @@ export default async function handler(
     res.status(200).send({ data: playlist });
   } else if (req.method === "POST") {
     await createPlaylist(req.body);
-    res.status(201).send({});
+    const playlist = await getPlaylist();
+    res.status(201).send({data: playlist[playlist.length-1]});
   }
 }
 
@@ -22,7 +25,7 @@ async function getPlaylist() {
   return result.map((doc) => {
     return {
       id: doc._id,
-      color: doc._color,
+      color: doc._color || DEFAULT_CARD_COLOR,
       name: doc._name,
       owner: doc._owner,
       slug: doc._slug,
