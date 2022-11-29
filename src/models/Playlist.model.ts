@@ -10,8 +10,6 @@ export interface PlaylistModel {
   upvote: number;
 }
 
-//export type PlaylistModelWithId = PlaylistModel & { id: string };
-
 const schema = new Schema<PlaylistModel>({
   color: { type: String, default: DEFAULT_CARD_COLOR },
   name: { type: String, required: true },

@@ -11,16 +11,16 @@ export default async function handler(
   await dbConnect();
 
   if (req.method === "GET") {
-    const playlist = await getPlaylist();
-    res.status(200).send({ data: playlist });
+    const playlists = await getPlaylists();
+    res.status(200).send({ data: playlists });
   } else if (req.method === "POST") {
     await createPlaylist(req.body);
-    const playlist = await getPlaylist();
-    res.status(201).send({data: playlist[playlist.length-1]});
+    const playlists = await getPlaylists();
+    res.status(201).send({ data: playlists[playlists.length - 1] });
   }
 }
 
-async function getPlaylist() {
+async function getPlaylists() {
   const result = await Playlist.find();
   return result.map((doc) => {
     const playlist = doc.toObject();
